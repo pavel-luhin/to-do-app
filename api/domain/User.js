@@ -1,7 +1,12 @@
-var User = function (username, password, email) {
-	this.username = username;
-	this.password = password;
-	this.email = email;
-}
+var mongoose = require('mongoose');
+
+var userSchema = mongoose.Schema({
+	username: String,
+	password: String,
+	email: String,
+	token: String
+});
+
+var User = mongoose.model('User', userSchema);
 
 module.exports = User;
