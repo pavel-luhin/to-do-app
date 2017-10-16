@@ -2,7 +2,7 @@
 
 Be sure that your machine have installed NodeJS with npm.
 
-# Steps to start the app:
+## Steps to start the app:
 1. 'npm install'
 2. 'node server.js'
 
