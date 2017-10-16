@@ -10,6 +10,8 @@ var port = process.env.PORT || 3021;
 app.use('/user', UserController);
 app.use('/authenticate', AuthenticationController);
 
+app.use(express.static(__dirname + '/UI'));
+
 app.listen(port);
 console.log('Sample app started on http://localhost:' + port);
 
