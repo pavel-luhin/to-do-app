@@ -9,7 +9,6 @@ router.post('/', (request, response) => {
 	User.findOne(
 		{username: request.body.username},
 		(error, user) => {
-			console.log(user);
 			if (error) {
 				return response.status(500).send('Some error occurred while authenticating user');
 			}

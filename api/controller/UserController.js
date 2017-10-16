@@ -12,7 +12,6 @@ router.post('/register', (request, response) => {
 		email: request.body.email
 	}, (error, user) => {
 		if (error) {
-			console.log(error);
 			return response.status(400).send('There was a problem adding new user to DB');
 		}
 
