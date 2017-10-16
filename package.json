@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/xinevic/to-do-app/issues"
   },
-  "homepage": "https://github.com/xinevic/to-do-app#readme"
+  "homepage": "https://github.com/xinevic/to-do-app#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
 }
