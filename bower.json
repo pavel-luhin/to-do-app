@@ -1,0 +1,21 @@
+{
+  "name": "to-do-app",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Pavel Luhin <pavel.luhin@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/xinevic/to-do-app",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "UI/libs",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.6.6"
+  }
+}

@@ -3,3 +3,4 @@ bower_components/
 *.log
 package-lock.json
 UI/libs
+.tmp/
