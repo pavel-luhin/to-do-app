@@ -1,0 +1,30 @@
+.add-record {
+	float: right;
+	margin-right: 40px;
+}
+
+.record {
+	position: relative;
+	z-index: 1;
+	background: #FFFFFF;
+	width: 300px;
+	height: 300px;
+	margin: 0 100px 100px;
+	padding: 45px;
+	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+	display: inline-block;
+}
+
+.record-title {
+	position: relative;
+	display: block;
+	font-size: 28pt;
+	margin-bottom: 20px;
+}
+
+.record-title:focus,
+.record-title:active,
+.record-title:hover {
+	cursor: pointer;
+	color: #666666;
+}

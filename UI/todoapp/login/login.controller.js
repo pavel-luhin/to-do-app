@@ -2,16 +2,28 @@
 	angular.module('todo').controller('loginCtrl', loginCtrl);
 
 	/** @ngInject */
-	function loginCtrl(loginService, $scope) {
+	function loginCtrl(loginService, $scope, $state) {
 		$scope.registerUser = registerUser;
 		$scope.authenticateUser = authenticateUser;
 
+
 		function registerUser(user) {
-			
+			loginService.register(user).then(function(data) {
+
+			}, function(error) {
+
+			});
 		}
 
-		function authenticateUser(user) {
-
+		function authenticateUser(user, loginForm) {
+			if (!loginForm.$valid) return;
+			
+			loginService.authenticate(user).then(function(data) {
+				$state.go('dashboard');
+			}, function(error) {
+				console.log(error);
+				alert(error.data);
+			});
 		}
 	}
 })();

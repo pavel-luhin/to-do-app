@@ -53,6 +53,13 @@ function buildTemplates() {
 	.pipe(gulp.dest('./.tmp/js/'));
 }
 
+gulp.task('fonts', copyFonts);
+
+function copyFonts() {
+	return gulp.src('./UI/libs/components-font-awesome/fonts/**.*')
+	.pipe(gulp.dest('./.tmp/fonts/'));
+}
+
 gulp.task('watch-styles', function () {
 	return watch('UI/styles/**/*.css', { ignoreInitial: false }, concatCss);
 });
@@ -65,7 +72,7 @@ gulp.task('watch-templates', function () {
 	return watch('UI/todoapp/**/*.html', { ignoreInitial: false }, buildTemplates);
 });
 
-gulp.task('build', ['libs-js', 'scripts-js', 'templatecache', 'css', 'inject']);
+gulp.task('build', ['libs-js', 'scripts-js', 'templatecache', 'css', 'fonts', 'inject']);
 
 gulp.task('watchers', ['watch-styles', 'watch-scripts', 'watch-templates']);
 

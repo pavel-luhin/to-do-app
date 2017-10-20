@@ -10,6 +10,12 @@
 			templateUrl: 'login/login.tmpl.html',
 			controller: 'loginCtrl',
 			controllerAs: 'ctrl',
+		})
+		.state('dashboard', {
+			url: '/dashboard',
+			templateUrl: 'dashboard/dashboard.tmpl.html',
+			controller: 'dashboardCtrl',
+			controllerAs: 'ctrl',
 		});
 
 		$urlRouterProvider.otherwise(function($injector) {

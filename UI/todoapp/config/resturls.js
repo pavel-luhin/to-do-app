@@ -4,7 +4,8 @@
 	function resturls() {
 		return {
 			REGISTER_USER: '/api/user/register',
-			AUTHENTICATE_USER: '/api/authenticate'
+			AUTHENTICATE_USER: '/api/authenticate',
+			TODOS: '/api/dashboard/todos'
 		}
 	}
 })();

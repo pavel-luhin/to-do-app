@@ -10,6 +10,7 @@
 		}
 
 		function authenticate(user) {
+			console.log(user);
 			return $http.post(RestURL.AUTHENTICATE_USER, user);
 		}
 
