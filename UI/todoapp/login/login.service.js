@@ -6,16 +6,20 @@
 		
 		return {
 			authenticate: authenticate,
-			register: register
+			register: register,
+			checkAvailable: checkAvailable,
 		}
 
 		function authenticate(user) {
-			console.log(user);
 			return $http.post(RestURL.AUTHENTICATE_USER, user);
 		}
 
 		function register(user) {
 			return $http.post(RestURL.REGISTER_USER, user);
+		}
+
+		function checkAvailable(name, value) {
+			return $http.get(RestURL.CHECK_AVAILABILITY + '?' + name + '=' + value);
 		}
 	}
 })();

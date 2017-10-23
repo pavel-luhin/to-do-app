@@ -1,3 +1,3 @@
 (function () {
-	var app = angular.module('todo', ['ui.router']);
+	var app = angular.module('todo', ['ui.router', 'ngMessages']);
 })();

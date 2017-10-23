@@ -10,6 +10,16 @@
 	font-size: 14px;
 }
 
-.input-field.error-input-field {
-	border: 3 solid red;
+.error-field input {
+	border: 1px solid red;
+	color: red;
+}
+
+.error-message {
+	margin-top: -10px;
+	margin-bottom: 10px;
+	float: left;
+	color: red;
+	font-family: "Roboto", sans-serif;
+	font-size: 12px;
 }

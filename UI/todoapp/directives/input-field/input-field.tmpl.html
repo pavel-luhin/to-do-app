@@ -1,8 +1,16 @@
-<div>
+<div ng-class="{'error-field': input.hasErrors(form[input.name])}">
 	<input 
 	type="{{input.type}}"
-	class='input-field' 
-	ng-required='input.ngRequired'
+	class="input-field"
+	ng-required="input.ngRequired"
 	ng-model="input.ngModel"
-	placeholder="{{input.placeholder}}">
+	placeholder="{{input.placeholder}}"
+	name="{{input.name}}"
+	check-available="{{input.checkAvailable}}"
+	match-with="{{input.matchWith}}"/>
+
+	<div class="error-message" ng-if="input.hasErrors(form[input.name])" ng-messages="form[input.name].$error" role="alert">
+		<span ng-message="available">You cannot use this {{input.checkAvailable}}</span>
+		<span ng-message="password-match">Password does not match</span>
+	</div>
 </div>

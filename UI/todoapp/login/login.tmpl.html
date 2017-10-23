@@ -1,18 +1,18 @@
 <div class="login-page">
 	<div class="form">
-		<form class="login-form" name="loginForm" ng-submit="authenticateUser(user, loginForm)" novalidate ng-if="registing">
+		<form class="login-form" name="loginForm" ng-submit="authenticateUser(user, loginForm)" novalidate ng-if="!ctrl.registering">
 			<input-field type="text" placeholder="Username" ng-model="user.username"></input-field>
 			<input-field type="password" placeholder="Password" ng-model="user.password"></input-field>
 			<button>log in</button>
 		</form>
-		<form class="login-form" name="registerForm" ng-submit="registerUser(user, registerForm)" novalidate ng-if="!registing">
-			<input-field type="text" placeholder="Username" ng-model="user.username" name="username"></input-field>
+		<p class="message" ng-if="!ctrl.registering">Not registered? <a class="clickable" ng-click="ctrl.registering = !ctrl.registering"> Register</a></p>
+		<form class="login-form" name="registerForm" ng-submit="registerUser(user, registerForm)" novalidate ng-if="ctrl.registering">
+			<input-field type="text" placeholder="Username" ng-model="user.username" name="username" check-available="username"></input-field>
 			<input-field type="password" placeholder="Password" ng-model="user.password" name="password"></input-field>
-			<input-field type="password" placeholder="Repeat password" ng-model="user.password" name="repatPassword" match-with="password"></input-field>
-			<input-field type="text" placeholder="Email" ng-model="user.email" name="email"></input-field>
+			<input-field type="password" placeholder="Repeat password" ng-model="user.repeatPassword" name="repatPassword" match-with="password"></input-field>
+			<input-field type="text" placeholder="Email" ng-model="user.email" name="email" check-available="email"></input-field>
 			<button>register</button>
 		</form>
-		<p class="message" ng-show="!registering">Not registered? <a class="clickable" ng-click="registing = !registing"> Register</a></p>
-		<p class="message" ng-if="registering">Already have an account? <a class="clickable" ng-click="registing = !registing"> Log In</a></p>
+		<p class="message" ng-if="ctrl.registering">Already have an account? <a class="clickable" ng-click="ctrl.registering = !ctrl.registering"> Log In</a></p>
 	</div>
 </div>

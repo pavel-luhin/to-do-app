@@ -5,9 +5,12 @@
 	function loginCtrl(loginService, $scope, $state) {
 		$scope.registerUser = registerUser;
 		$scope.authenticateUser = authenticateUser;
+		$scope.emailAvailable = true;
+		$scope.usernameAvailable = true;
 
+		function registerUser(user, registerForm) {
+			if (!registerForm.$valid) return;
 
-		function registerUser(user) {
 			loginService.register(user).then(function(data) {
 
 			}, function(error) {

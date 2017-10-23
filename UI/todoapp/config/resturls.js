@@ -5,7 +5,8 @@
 		return {
 			REGISTER_USER: '/api/user/register',
 			AUTHENTICATE_USER: '/api/authenticate',
-			TODOS: '/api/dashboard/todos'
+			TODOS: '/api/dashboard/todos',
+			CHECK_AVAILABILITY: '/api/user/check-available'
 		}
 	}
 })();
