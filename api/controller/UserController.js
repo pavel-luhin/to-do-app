@@ -17,8 +17,10 @@ router.get('/check-available', (request, response) => {
 
 	if (request.query.email) {
 		User.findOne({email: request.query.email}, callback);
-	} else {
+	} else if (request.query.username) {
 		User.findOne({username: request.query.username}, callback);
+	} else {
+		return response.status(200).send(true);
 	}
 });
 
