@@ -1,15 +1,21 @@
 var router = require('express').Router();
 var User = require('../domain/User');
 var bodyParser = require('body-parser');
+var SecurityUtils = require('../config/SecurityUtils');
 
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
 router.post('/register', (request, response) => {
+	var username = request.body.username;
+	var password = request.body.password;
+
+	var encodedPassword = SecurityUtils.encodePassword(password, username);
+
 	User.create({
 		username: request.body.username,
-		password: request.body.password,
-		email: request.body.email
+		password: encodedPassword,
+	email: request.body.email
 	}, (error, user) => {
 		if (error) {
 			return response.status(400).send('There was a problem adding new user to DB');

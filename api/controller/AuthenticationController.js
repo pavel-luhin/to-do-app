@@ -2,16 +2,17 @@ var router = require('express').Router();
 var User = require('../domain/User');
 var bodyParser = require('body-parser');
 var uuid = require('uuid/v1');
+var SecurityUtils = require('../config/SecurityUtils');
 
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
 router.post('/', (request, response) => {
+	var username = request.body.username;
 	User.findOne(
-		{username: request.body.username},
+		{username: username},
 		(error, user) => {
 
-			console.log(request.body);
 			if (error) {
 				return response.status(500).send('Some error occurred while authenticating user');
 			}
@@ -20,7 +21,10 @@ router.post('/', (request, response) => {
 				return response.status(404).send('User was not found');
 			}
 
-			if (user.password !== request.body.password) {
+			var password = request.body.password;
+			var encodedPassword = SecurityUtils.encodePassword(password, username);
+
+			if (user.password !== encodedPassword) {
 				return response.status(400).send('Invalid password');
 			}
 
