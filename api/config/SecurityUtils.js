@@ -20,4 +20,8 @@ SecurityUtils.setCookieToken = function(response) {
 	return token;
 }
 
+SecurityUtils.getTokenFromRequest = function(request) {
+	return request.cookie.authTokenCookieName;
+}
+
 module.exports = SecurityUtils;
