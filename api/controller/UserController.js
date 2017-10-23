@@ -6,6 +6,22 @@ var SecurityUtils = require('../config/SecurityUtils');
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
+router.get('/check-available', (request, response) => {
+	var callback = function (error, user) {
+		if (error) {
+			return response.status(400).send('Cannot check availability');
+		}
+
+		return response.status(200).send(!user);
+	}
+
+	if (request.query.email) {
+		User.findOne({email: request.query.email}, callback);
+	} else {
+		User.findOne({username: request.query.username}, callback);
+	}
+});
+
 router.post('/register', (request, response) => {
 	var username = request.body.username;
 	var password = request.body.password;
@@ -15,9 +31,14 @@ router.post('/register', (request, response) => {
 	User.create({
 		username: request.body.username,
 		password: encodedPassword,
-	email: request.body.email
+		email: request.body.email
 	}, (error, user) => {
 		if (error) {
+			//duplicate record error code
+			if (error.code === 11000) {
+				return response.status(400).send('User with such data already exists');
+			}
+			
 			return response.status(400).send('There was a problem adding new user to DB');
 		}
 

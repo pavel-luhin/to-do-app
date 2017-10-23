@@ -1,7 +1,6 @@
 var router = require('express').Router();
 var User = require('../domain/User');
 var bodyParser = require('body-parser');
-var uuid = require('uuid/v1');
 var SecurityUtils = require('../config/SecurityUtils');
 
 router.use(bodyParser.urlencoded({ extended: true }));
@@ -28,9 +27,7 @@ router.post('/', (request, response) => {
 				return response.status(400).send('Invalid password');
 			}
 
-			var token = uuid();
-			response.cookie('x-auth-token', token);
-			user.token = token;
+			user.token = SecurityUtils.setCookieToken(response);
 
 			user.save(function (eror) {
 				if (error) {
