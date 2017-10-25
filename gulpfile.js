@@ -7,38 +7,42 @@ var minifyHtml = require('gulp-minify-html');
 var inject = require('gulp-inject');
 var watch = require('gulp-watch');
 
-gulp.task('libs-js', function () {
+gulp.task('libs-js', function (done) {
 	gulp.src('UI/libs/**/*.min.js')
 	.pipe(concat('vendors.js'))
 	.pipe(ngAnnotate())
 	.pipe(uglify())
 	.pipe(gulp.dest('./.tmp/js'));
+	done();
 });
 
 gulp.task('css', concatCss);
 
-function concatCss() {
+function concatCss(done) {
 	gulp.src('UI/**/*.css')
 	.pipe(concat('styles.css'))
 	.pipe(gulp.dest('./.tmp/styles'));
+	done();
 }
 
 gulp.task('scripts-js', buildScripts);
 
-function buildScripts() {
+function buildScripts(done) {
 	gulp.src(['UI/todoapp/todo.module.js', 'UI/todoapp/**/*.js'])
 	.pipe(concat('app.js'))
 	.pipe(ngAnnotate())
 	.pipe(uglify())
 	.pipe(gulp.dest('./.tmp/js'));
+	done();
 }
 
-gulp.task('inject', function () {
+gulp.task('inject', function (done) {
 	gulp.src('UI/index.html')
 	.pipe(inject(gulp.src('./.tmp/js/vendors.js', {read: false}), {ignorePath: '.tmp', addRootSlash: false, name: 'head'}))
 	.pipe(inject(gulp.src(['./.tmp/js/app.js', './.tmp/js/templates.js'], {read: false}), {ignorePath: '.tmp', addRootSlash: false}))
 	.pipe(inject(gulp.src('./.tmp/styles/styles.css'), {ignorePath: '.tmp', addRootSlash: false}))
 	.pipe(gulp.dest('./.tmp'));
+	done();
 });
 
 gulp.task('templatecache', buildTemplates);

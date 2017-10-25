@@ -4,6 +4,6 @@
 
 	/** @ngInject */
 	function applicationCtrl($scope) {
-		$scope.test = "testtttt";
+
 	}
 })();

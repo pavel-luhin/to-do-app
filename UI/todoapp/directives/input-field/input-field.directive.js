@@ -20,7 +20,8 @@
 				ngRequired: '@',
 				placeholder: '@',
 				checkAvailable: '@',
-				matchWith: '@'
+				match: '@',
+				matchWith: '='
 			}
 		};
 

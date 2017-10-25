@@ -12,7 +12,7 @@
 			if (!registerForm.$valid) return;
 
 			loginService.register(user).then(function(data) {
-
+				$scope.registering = false;
 			}, function(error) {
 
 			});
