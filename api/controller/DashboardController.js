@@ -6,14 +6,15 @@ router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
 router.get('/todos', (request, response) => {
+	let user = request.user;
 	//todo temp solution
-	Todo.find({createdBy: 'admin'}, (error, todos) => {
+	Todo.find({createdBy: user.username}, (error, todos) => {
 		if (error) {
-			response.status(500).send('Some error occured while retrieving users todos');
+			return response.status(500).send('Some error occured while retrieving users todos');
 		}
 
-		if (!todos) {
-			response.status(404).send('No todos found for user');
+		if (!todos || todos.length === 0) {
+			return response.status(204).send();
 		}
 
 		response.status(200).send(todos);

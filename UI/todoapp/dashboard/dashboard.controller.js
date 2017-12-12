@@ -13,7 +13,7 @@
 		activate();
 
 		function retrieveUserTodos() {
-			dashboardService.retrieveForUser().then(function (data) {
+			dashboardService.retrieveForCurrentUser().then(function (data) {
 				console.log(data);
 				$scope.userTodos = data.data;
 			}, function (error) {

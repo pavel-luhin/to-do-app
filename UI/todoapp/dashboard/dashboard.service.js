@@ -4,11 +4,11 @@
 	/** @ngInject */
 	function dashboardService(RestURL, $http) {
 		return {
-			retrieveForUser: retrieveForUser,
+			retrieveForCurrentUser: retrieveForCurrentUser,
 			saveForUser: saveForUser
 		}
 
-		function retrieveForUser(user) {
+		function retrieveForCurrentUser() {
 			return $http.get(RestURL.TODOS);
 		}
 

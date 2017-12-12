@@ -14,10 +14,8 @@ SecurityUtils.encodePassword = function (plainPassword, username) {
 	return cryptoJS.enc.Base64.stringify(cryptoJS.HmacSHA1(passwordHash, usernameHash));
 }
 
-SecurityUtils.setCookieToken = function(response) {
-	var token = uuid();
-	response.cookie(authTokenCookieName, token);
-	return token;
+SecurityUtils.generateToken = function() {
+	return uuid();
 }
 
 SecurityUtils.getTokenFromRequest = function(request) {

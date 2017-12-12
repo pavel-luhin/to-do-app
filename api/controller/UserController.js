@@ -2,6 +2,7 @@ var router = require('express').Router();
 var User = require('../domain/User');
 var bodyParser = require('body-parser');
 var SecurityUtils = require('../config/SecurityUtils');
+var passport = require('passport');
 
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
@@ -23,6 +24,10 @@ router.get('/check-available', (request, response) => {
 		return response.status(200).send(true);
 	}
 });
+
+router.post('/authenticate', passport.authenticate('local'), (request, response) => {
+	response.redirect('/');
+})
 
 router.post('/register', (request, response) => {
 	var username = request.body.username;
@@ -49,7 +54,6 @@ router.post('/register', (request, response) => {
 });
 
 router.get('/:id', (request, response) => {
-	console.log(request.params.id);
 	User.findById(
 		request.params.id, 
 		{password: 0},
