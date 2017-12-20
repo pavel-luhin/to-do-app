@@ -1,14 +1,15 @@
 var router = require('express').Router();
 var bodyParser = require('body-parser');
-var Todo = require('../domain/Todo')
+var Todo = require('../domain/Todo');
+var SecurityUtils = require('../config/SecurityUtils');
 
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
-router.get('/todos', (request, response) => {
+router.get('/todos', SecurityUtils.checkAuthentication ,(request, response) => {
 	let user = request.user;
 	//todo temp solution
-	Todo.find({createdBy: user.username}, (error, todos) => {
+	Todo.find({createdBy: request.username}, (error, todos) => {
 		if (error) {
 			return response.status(500).send('Some error occured while retrieving users todos');
 		}
@@ -21,13 +22,13 @@ router.get('/todos', (request, response) => {
 	});
 });
 
-router.get('/todos/:id', (request, response) => {
+router.get('/todos/:id', SecurityUtils.checkAuthentication, (request, response) => {
 	Todo.findById(request.params.id, (error, todo) => {
 		if (error) {
 			response.status(500).send('Some error occured while retrieving users todo');
 		}
 
-		if (!todo) {
+		if (!todo || todo.createdBy != request.username) {
 			response.status(404).send('Todo with given id could not been found');
 		}
 
@@ -35,18 +36,18 @@ router.get('/todos/:id', (request, response) => {
 	});
 });
 
-router.post('/todos', (request, response) => {
+router.post('/todos', SecurityUtils.checkAuthentication, (request, response) => {
 	Todo.create({
 		title: request.body.title,
-		fullContent: request.body.content,
-		createdBy: 'admin',
+		fullContent: request.content,
+		createdBy: request.username,
 		created: new Date()
 	}, (creationError, todo) => {
 		if (creationError) {
 			response.status(500).send('Some error occured while saving todo');
 		}
 
-		Todo.find({createdBy: 'admin'}, (error, todos) => {
+		Todo.find({createdBy: request.username}, (error, todos) => {
 			if (error) {
 				response.status(500).send('Some error occured while retrieving users todos');
 			}

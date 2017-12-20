@@ -27,7 +27,7 @@ router.get('/check-available', (request, response) => {
 
 router.post('/authenticate', passport.authenticate('local'), (request, response) => {
 	response.redirect('/');
-})
+});
 
 router.post('/register', (request, response) => {
 	var username = request.body.username;

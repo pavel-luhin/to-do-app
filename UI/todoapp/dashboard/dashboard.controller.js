@@ -14,10 +14,9 @@
 
 		function retrieveUserTodos() {
 			dashboardService.retrieveForCurrentUser().then(function (data) {
-				console.log(data);
 				$scope.userTodos = data.data;
 			}, function (error) {
-				alert(error.data);
+				
 			});
 		}
 

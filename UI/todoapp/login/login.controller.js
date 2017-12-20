@@ -2,7 +2,7 @@
 	angular.module('todo').controller('loginCtrl', loginCtrl);
 
 	/** @ngInject */
-	function loginCtrl(loginService, $scope, $state) {
+	function loginCtrl(loginService, $scope, $state, toastr) {
 		$scope.registerUser = registerUser;
 		$scope.authenticateUser = authenticateUser;
 		$scope.emailAvailable = true;
@@ -20,7 +20,7 @@
 
 		function authenticateUser(user, loginForm) {
 			if (!loginForm.$valid) return;
-			
+
 			loginService.authenticate(user).then(function(data) {
 				$state.go('dashboard');
 			}, function(error) {

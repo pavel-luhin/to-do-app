@@ -7,7 +7,6 @@ passport.use('local', new LocalStrategy({
 	usernameField: 'username',
 	passwordField: 'password'
 }, (username, password, done) => {
-	console.log(username);
 	User.findOne({username}, (error, user) => {
 		if (error) {
 			done(error);
@@ -26,8 +25,6 @@ passport.use('local', new LocalStrategy({
 		user.token = SecurityUtils.generateToken();
 		user.save();
 		delete user.password;
-
-		console.log(user);
 
 		done(null, user);
 	})

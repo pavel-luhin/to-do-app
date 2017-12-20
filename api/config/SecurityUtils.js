@@ -22,4 +22,11 @@ SecurityUtils.getTokenFromRequest = function(request) {
 	return request.cookie.authTokenCookieName;
 }
 
+SecurityUtils.checkAuthentication = function(request, response, next) {
+	if (!request.isAuthenticated()) {
+		return response.status(401).send();
+	}
+	return next();
+}
+
 module.exports = SecurityUtils;
